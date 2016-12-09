@@ -5,7 +5,7 @@ const SRC = 'assets/ship.png';
 const WIDTH = 6;
 const HEIGHT = 6;
 
-export default class ShipSprite extends _Sprite {
+export default class PlayerSprite extends _Sprite {
   static loadResource (loader) {
     loader.load.spritesheet(KEY, SRC, WIDTH, HEIGHT);
   }

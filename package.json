@@ -1,7 +1,7 @@
 {
-  "name": "LudumDare34-Practice",
+  "name": "dungeon-explorer",
   "version": "1.0.0",
-  "description": "A bit of practice with Phaser, ES2015 and Webpack",
+  "description": "Explore dungeons!",
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack-dev-server --content-base build/ --inline",
@@ -10,9 +10,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ninjascribble/LudumDare34-Practice"
+    "url": "https://github.com/bmceldowney/dungeon-explorer"
   },
-  "author": "@ninjascript",
+  "author": "@bmceldowney",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "6.13.2",
@@ -26,6 +26,7 @@
     "webpack-dev-server": "1.14.1"
   },
   "dependencies": {
-    "phaser": "2.6.1"
+    "phaser": "2.6.1",
+    "rot-js": "^0.6.2"
   }
 }

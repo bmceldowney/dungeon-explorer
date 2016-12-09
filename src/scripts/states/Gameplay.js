@@ -7,7 +7,7 @@ export default class Gameplay extends _State {
     this.world.setBounds(0, 0, 1400, 1400);
     this.titleText = this.createTitleText(this.world.centerX, 40);
     this.player = Actors.player(this.game, this.world.centerX, 60, this.world);
-    this.camera.follow(this.player.ship, Phaser.Camera.FOLLOW_LOCKON);
+    this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON);
   }
 
   createTitleText (x, y) {
@@ -16,7 +16,7 @@ export default class Gameplay extends _State {
 
   update () {
     if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-      this.player.respawn(this.game.world.centerX, this.player.ship.y);
+      this.player.respawn(this.game.world.centerX, this.player.sprite.y);
     }
 
     if (this.input.keyboard.isDown(Phaser.Keyboard.O)) {

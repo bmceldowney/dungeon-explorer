@@ -11,11 +11,11 @@ export default class Menu extends _State {
   }
 
   createTitleText (x, y) {
-    return Fonts.display(this.game, x, y, 'this is the menu', 12, 'center', this.world);
+    return Fonts.display(this.game, x, y, 'dungeon explorer', 11, 'center', this.world);
   }
 
   createActionText (x, y) {
-    return Fonts.display(this.game, x, y, 'press space\r\nto start the game', 6, 'center', this.world);
+    return Fonts.display(this.game, x, y, 'press space\r\nto begin exploring', 8, 'center', this.world);
   }
 
   update () {
