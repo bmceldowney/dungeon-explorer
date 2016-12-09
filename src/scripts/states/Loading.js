@@ -24,10 +24,16 @@ export default class Loading extends _State {
   preload () {
     Fonts.loadResources(this);
     Sprites.loadResources(this);
+
+    this.game.load.image('LevelTiles', 'assets/LevelTiles.png');
+    this.game.load.tilemap('testingGrounds', 'assets/testingGrounds.json', null, Phaser.Tilemap.TILED_JSON);
+    this.game.load.atlas('actors', 'assets/8-bit-fantasy/actors.png', 'assets/8-bit-fantasy/actors.json', Phaser.Loader.TEXTURE_ATLAS_JSON_HASH);
   }
 
   // create() is automagically triggerd after preload completes
   create () {
-    this.stateProvider.menu(this.state);
+    // this.stateProvider.menu(this.state);
+    // TEMP
+    this.stateProvider.gameplay(this.state);
   }
 }
