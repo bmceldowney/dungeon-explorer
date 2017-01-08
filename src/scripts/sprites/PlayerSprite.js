@@ -1,31 +1,22 @@
 import _Sprite from './_Sprite'
 
-const KEY = 'actors'
+const KEY = 'player_sprite'
 const SRC = 'assets/8-bit-fantasy/actors.png'
 const WIDTH = 8
 const HEIGHT = 8
 const animationKey = 'man01_'
-const idleFrames = Phaser.Animation.generateFrameNames(animationKey, 1, 2, '', 2)
+const idleFrames = Phaser.Animation.generateFrameNames(animationKey, 3, 3, '', 2)
 const walkFrames = [
-  `${animationKey}01`,
   `${animationKey}03`,
-  `${animationKey}04`,
-  `${animationKey}05`
+  `${animationKey}04`
 ]
 const walkUpFrames = [
-  `${animationKey}13`,
-  `${animationKey}14`,
-  `${animationKey}15`,
-  `${animationKey}14`
+    `${animationKey}03`,
+    `${animationKey}04`
 ]
 const attackFrames = [
-  `${animationKey}02`,
-  `${animationKey}07`,
-  `${animationKey}08`,
-  `${animationKey}09`,
-  `${animationKey}08`,
-  `${animationKey}07`,
-  `${animationKey}02`
+    `${animationKey}03`,
+    `${animationKey}04`
 ]
 
 export default class PlayerSprite extends _Sprite {
@@ -47,6 +38,6 @@ export default class PlayerSprite extends _Sprite {
     // this.animations.add('normal', [0, 1, 2], 20, true)
     // this.animations.add('bank', [3, 4, 5], 20, true)
     // this.animations.add('explode', [6, 7, 8], 12, false)
-    this.anchor.setTo(0.5, 1)
+    this.anchor.setTo(0, 0)
   }
 }

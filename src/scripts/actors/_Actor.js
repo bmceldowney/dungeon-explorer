@@ -1,9 +1,9 @@
-const MOVE_DURATION = 100
+const MOVE_DURATION = 75
 const UP = 'up'
 const DOWN = 'down'
 const LEFT = 'left'
 const RIGHT = 'right'
-const MOVE_DISTANCE = 16
+const MOVE_DISTANCE = 8
 
 export default class Actor {
   constructor (game, sprite) {
@@ -14,7 +14,11 @@ export default class Actor {
     this.isAlive = true;
     this.facing = DOWN;
 
-    this.sprite.body.onMoveComplete.add(() => this.canMove = true)
+    this.sprite.body.onMoveComplete.add(() => {
+        this.sprite.body.x = Phaser.Math.snapTo(this.sprite.body.x, 8);
+        this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, 8);
+        this.canMove = true
+    })
     // this.sprite.body.onCollide.add(() => this.canMove = true)
   }
 

@@ -1,0 +1,24 @@
+{
+    "frames": {
+        "man01_01": {
+    		"frame": {"x":0, "y":0, "w":8, "h":8},
+    		"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+    		"sourceSize": {"w":8,"h":8}
+    	},
+        "man01_02": {
+    		"frame": {"x":8, "y":0, "w":8, "h":8},
+    		"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+    		"sourceSize": {"w":8,"h":8}
+    	},
+        "man01_03": {
+    		"frame": {"x":0, "y":8, "w":8, "h":8},
+    		"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+    		"sourceSize": {"w":8,"h":8}
+    	},
+        "man01_04": {
+    		"frame": {"x":8, "y":8, "w":8, "h":8},
+    		"spriteSourceSize": {"x":0,"y":0,"w":8,"h":8},
+    		"sourceSize": {"w":8,"h":8}
+    	}
+    }
+}

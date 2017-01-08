@@ -5,7 +5,7 @@ module.exports = {
     PlayerSprite.loadResource(loader);
   },
 
-  player: function playerShip (game, x, y) {
+  player: function player (game, x, y) {
     return new PlayerSprite(game, x, y);
   }
 };

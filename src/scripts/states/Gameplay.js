@@ -4,6 +4,12 @@ import Fonts from '../fonts'
 import levels from '../levels'
 
 export default class Gameplay extends _State {
+  constructor () {
+    super()
+    this.points = []
+    this.playerTarget = null
+  }
+
   preload () {
     this.level = levels.getLevel(this.game)
   }
@@ -11,41 +17,30 @@ export default class Gameplay extends _State {
   create () {
     this.level.addMap()
 
-    this.player = Actors.player(this.game, this.world.centerX, 60, this.world);
-    this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON);
+    let playerStartX = Phaser.Math.snapTo(this.world.centerX, 8)
+    let playerStartY = Phaser.Math.snapTo(this.world.centerY, 8)
+    this.player = Actors.player(this.game, playerStartX, playerStartY, this.world)
+    this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON)
+
+    this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
   }
 
   createTitleText (x, y) {
     return Fonts.display(this.game, x, y, 'this is the game', 12, 'center', this.world)
   }
 
+  pointerClicked (btn) {
+    let point = new Phaser.Point(Math.floor(btn.parent.x), Math.floor(btn.parent.y))
+    this.playerTarget = point
+    this.points.push(point)
+  }
+
   update () {
-    if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-      this.player.respawn(this.game.world.centerX, this.player.sprite.y)
-    }
+  }
 
-    if (this.input.keyboard.isDown(Phaser.Keyboard.O)) {
-      this.player.kill()
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
-      this.player.attack()
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.UP)) {
-      this.player.moveUp()
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.DOWN)) {
-      this.player.moveDown()
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-      this.player.moveLeft()
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-      this.player.moveRight()
-    }
+  render () {
+    this.points.forEach((point) => {
+      this.game.debug.pixel(point.x, point.y)
+    })
   }
 }

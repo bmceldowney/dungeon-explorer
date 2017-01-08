@@ -1,10 +1,10 @@
 import _BitmapFont from './_BitmapFont';
 
-const KEY = '8bit_wonder-light';
-const FONT = 'assets/8bit_wonder-light.png';
-const MAP = 'assets/8bit_wonder-light.fnt';
+const KEY = 'alagard';
+const FONT = '/assets/fonts/alagard_gradient.png';
+const MAP = '/assets/fonts/alagard_gradient.fnt';
 
-export default class DisplayFont extends _BitmapFont {
+export default class MenuFont extends _BitmapFont {
   static loadResource (loader) {
     loader.load.bitmapFont(KEY, FONT, MAP);
   }
