@@ -25,10 +25,6 @@ export default class Gameplay extends _State {
     this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
   }
 
-  createTitleText (x, y) {
-    return Fonts.display(this.game, x, y, 'this is the game', 12, 'center', this.world)
-  }
-
   pointerClicked (btn) {
     let point = new Phaser.Point(Math.floor(btn.parent.x), Math.floor(btn.parent.y))
     this.playerTarget = point
