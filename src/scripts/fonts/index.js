@@ -1,12 +1,12 @@
-import DisplayFont from './DisplayFont';
+import MenuFont from './MenuFont';
 
 module.exports = {
   loadResources: function loadResources (loader) {
-    DisplayFont.loadResource(loader);
+    MenuFont.loadResource(loader);
   },
 
-  display: function display (game, x, y, text, size, align, group) {
-    var font = new DisplayFont(game, x, y, text, size, align);
+  menu: function menu (game, x, y, text, size, align, group) {
+    var font = new MenuFont(game, x, y, text, size, align);
 
     if (group) {
       group.add(font);

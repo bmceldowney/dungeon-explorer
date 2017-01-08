@@ -1,36 +1,42 @@
-import _State from './_State';
-import Actors from '../actors';
-import Fonts from '../fonts';
+import _State from './_State'
+import Actors from '../actors'
+import Fonts from '../fonts'
+import levels from '../levels'
 
 export default class Gameplay extends _State {
-  create () {
-    this.world.setBounds(0, 0, 1400, 1400);
-    this.titleText = this.createTitleText(this.world.centerX, 40);
-    this.player = Actors.player(this.game, this.world.centerX, 60, this.world);
-    this.camera.follow(this.player.ship, Phaser.Camera.FOLLOW_LOCKON);
+  constructor () {
+    super()
+    this.points = []
+    this.playerTarget = null
   }
 
-  createTitleText (x, y) {
-    return Fonts.display(this.game, x, y, 'this is the game', 12, 'center', this.world);
+  preload () {
+    this.level = levels.getLevel(this.game)
+  }
+
+  create () {
+    this.level.addMap()
+
+    let playerStartX = Phaser.Math.snapTo(this.world.centerX, 8)
+    let playerStartY = Phaser.Math.snapTo(this.world.centerY, 8)
+    this.player = Actors.player(this.game, playerStartX, playerStartY, this.world)
+    this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON)
+
+    this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
+  }
+
+  pointerClicked (btn) {
+    let point = new Phaser.Point(Math.floor(btn.parent.x), Math.floor(btn.parent.y))
+    this.playerTarget = point
+    this.points.push(point)
   }
 
   update () {
-    if (this.input.keyboard.isDown(Phaser.Keyboard.A)) {
-      this.player.respawn(this.game.world.centerX, this.player.ship.y);
-    }
+  }
 
-    if (this.input.keyboard.isDown(Phaser.Keyboard.O)) {
-      this.player.destroy();
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.LEFT)) {
-      this.player.bankLeft();
-    }
-
-    if (this.input.keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-      this.player.bankRight();
-    }
-
-    this.player.update();
+  render () {
+    this.points.forEach((point) => {
+      this.game.debug.pixel(point.x, point.y)
+    })
   }
 }

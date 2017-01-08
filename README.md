@@ -1,7 +1,6 @@
-Game Jam Boilerplate
+Dungon Explorer!!!!
 --
-This project is a jumping-off point for building browser-based games with the
-[Phaser](http://phaser.io/) JavaScript framework.
+Explore dungeons!
 
 ### Getting Started
 Install all dependencies and run the dev server:

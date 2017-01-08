@@ -1,11 +1,11 @@
-import ShipSprite from './ShipSprite';
+import PlayerSprite from './PlayerSprite';
 
 module.exports = {
   loadResources: function loadResources (loader) {
-    ShipSprite.loadResource(loader);
+    PlayerSprite.loadResource(loader);
   },
 
-  ship: function playerShip (game, x, y) {
-    return new ShipSprite(game, x, y);
+  player: function player (game, x, y) {
+    return new PlayerSprite(game, x, y);
   }
 };
