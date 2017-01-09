@@ -33,11 +33,6 @@ export default class PlayerSprite extends _Sprite {
     this.animations.add('attack', attackFrames, 15, false)
     this.animations.play('idle')
 
-    // this.idle()
-    //
-    // this.animations.add('normal', [0, 1, 2], 20, true)
-    // this.animations.add('bank', [3, 4, 5], 20, true)
-    // this.animations.add('explode', [6, 7, 8], 12, false)
-    this.anchor.setTo(0, 0)
+    this.anchor.setTo(.5, 0)
   }
 }

@@ -33,8 +33,8 @@ export default class Loading extends _State {
 
   // create() is automagically triggerd after preload completes
   create () {
-    this.stateProvider.menu(this.state);
+    // this.stateProvider.menu(this.state);
     // TEMP
-    // this.stateProvider.gameplay(this.state);
+    this.stateProvider.gameplay(this.state);
   }
 }
