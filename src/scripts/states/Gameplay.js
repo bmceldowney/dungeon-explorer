@@ -2,7 +2,7 @@ import _State from './_State'
 import Actors from '../actors'
 import Fonts from '../fonts'
 import levels from '../levels'
-import services from '../services';
+import services from '../services'
 
 export default class Gameplay extends _State {
   constructor () {
@@ -25,9 +25,9 @@ export default class Gameplay extends _State {
 
     this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
 
-    this.pathfinding = services.pathfinding();
-    this.pathfinding.loadTiledMap(this.level.map);
-
+    this.pathfinding = services.pathfinding()
+    this.pathfinding.loadTiledMap(this.level.map)
+    this.scheduling = services.scheduling()
   }
 
   pointerClicked (btn) {

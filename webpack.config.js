@@ -27,6 +27,9 @@ module.exports = {
     }, {
       from: '../node_modules/phaser/build',
       to: 'scripts'
+    }, {
+      from: './external',
+      to: 'scripts'
     }])
   ]
 };
