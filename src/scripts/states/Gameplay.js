@@ -18,8 +18,8 @@ export default class Gameplay extends _State {
   create () {
     this.level.addMap()
 
-    let playerStartX = Phaser.Math.snapTo(this.world.centerX, 8)
-    let playerStartY = Phaser.Math.snapTo(this.world.centerY, 8)
+    let playerStartX = Phaser.Math.snapTo(this.world.centerX - 4, 8)
+    let playerStartY = Phaser.Math.snapTo(this.world.centerY - 4, 8)
     this.player = Actors.player(this.game, playerStartX, playerStartY, this.world)
     this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON)
 
@@ -34,9 +34,11 @@ export default class Gameplay extends _State {
     const point = new Phaser.Point(Math.floor(btn.parent.worldX), Math.floor(btn.parent.worldY))
     this.playerTarget = point
     this.pathfinding.findPath(this.player.getCenteredPosition(), point, result => {
-      this.path = result
-      const angle = Phaser.Math.radToDeg(Phaser.Math.angleBetweenPoints(this.path[0], this.path[1]))
-      this.player.moveAngle(angle)
+      if (result && result.length) {
+        this.path = result
+        const angle = Phaser.Math.radToDeg(Phaser.Math.angleBetweenPoints(this.path[0], this.path[1]))
+        this.player.moveAngle(angle)
+      }
     })
   }
 
