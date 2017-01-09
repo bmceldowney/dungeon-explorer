@@ -14,6 +14,9 @@ function tileToPoint (point) {
 }
 
 export default {
+  // uses a flood-fill to determine the area of an enclosed space
+  // currently assumes 0 is passable and 1 is blocked
+  // TODO: modify to use the walkables list 
   countContiguousTiles: (playerSprite, gridSize) => {
     const visitedTiles = []
     const tileQueue = []
@@ -69,6 +72,7 @@ export default {
     easystar.calculate()
   },
 
+  // used to load tilemap data that was generated in Tiled
   loadTiledMap: (tiledMap) => {
     const grid = tiledMap.layers[0].data.map(row => row.map(column => column.index))
     const walkables = []
@@ -85,37 +89,6 @@ export default {
     })
 
     easystar.setGrid(grid)
-    easystar.setAcceptableTiles(walkables)
-  },
-
-  // call this before finding paths or whenever the map changes
-  calculateGrid: (obstacleGroups, mapSize, gridSize) => {
-    const walkables = [0]
-    const gridWidth = mapSize.width / gridSize.width
-    const gridHeight = mapSize.height / gridSize.height
-
-    mapData = []
-
-    console.log('calculating grid')
-
-    for (let i = 0; i < gridHeight; i++) {
-      for (let j = 0; j < gridWidth; j++) {
-        if (!mapData[i]) {
-          mapData[i] = []
-        }
-
-        mapData[i][j] = 0
-      }
-    }
-
-    obstacleGroups.forEach((obstacleGroup) => {
-      obstacleGroup.children.forEach((obstacle) => {
-        let tile = pointToTile(obstacle.body.position)
-        mapData[tile.y][tile.x] = 1
-      })
-    })
-
-    easystar.setGrid(mapData)
     easystar.setAcceptableTiles(walkables)
   },
 
