@@ -3,6 +3,7 @@ import Actors from '../actors'
 import Fonts from '../fonts'
 import levels from '../levels'
 import services from '../services'
+import constants from '../constants'
 
 export default class Gameplay extends _State {
   constructor () {
@@ -12,20 +13,25 @@ export default class Gameplay extends _State {
   }
 
   preload () {
+    this.context = services.context()
+
     this.level = levels.getLevel(this.game)
+    this.context.init(this.game)
   }
 
   create () {
+    const context = this.game.context
+    this.pathfinding = services.pathfinding()
+
     this.level.addMap()
 
-    let playerStartX = Phaser.Math.snapTo(this.world.centerX - 4, 8)
-    let playerStartY = Phaser.Math.snapTo(this.world.centerY - 4, 8)
-    this.player = Actors.player(this.game, playerStartX, playerStartY, this.world)
+    const playerStart = this.pathfinding.tileToPoint(context.player.position)
+
+    this.player = Actors.player(this.game, playerStart.x, playerStart.y, this.world)
     this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON)
 
     this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
 
-    this.pathfinding = services.pathfinding()
     this.pathfinding.loadTiledMap(this.level.map)
     this.scheduling = services.scheduling()
   }
@@ -46,19 +52,24 @@ export default class Gameplay extends _State {
   }
 
   render () {
-    const mouseX = Phaser.Math.snapTo(Math.floor(this.game.input.activePointer.x - 4), 8)
-    const mouseY = Phaser.Math.snapTo(Math.floor(this.game.input.activePointer.y - 4), 8)
+    const mouseX = Phaser.Math.snapTo(Math.floor(this.game.input.activePointer.worldX - (constants.TILEWIDTH / 2)), constants.TILEWIDTH)
+    const mouseY = Phaser.Math.snapTo(Math.floor(this.game.input.activePointer.worldY - (constants.TILEHEIGHT / 2)), constants.TILEHEIGHT)
+    const worldPos = this.game.world.worldPosition
 
-    this.game.debug.pixel(mouseX, mouseY)
-    this.game.debug.pixel(mouseX + 6, mouseY)
-    this.game.debug.pixel(mouseX, mouseY + 6)
-    this.game.debug.pixel(mouseX + 6, mouseY + 6)
+    const pixOffsetX = constants.TILEWIDTH - 2
+    const pixOffsetY = constants.TILEHEIGHT - 2
+    const x = mouseX + worldPos.x
+    const y = mouseY + worldPos.y
+
+    this.game.debug.pixel(x, y)
+    this.game.debug.pixel(x + pixOffsetX, y)
+    this.game.debug.pixel(x, y + pixOffsetY)
+    this.game.debug.pixel(x + pixOffsetX, y + pixOffsetY)
 
     // if (this.path) {
     //   this.path.forEach(tile => {
     //     const point = this.pathfinding.tileToPoint(tile)
-    //     const worldPos = this.game.world.worldPosition
-    //     this.game.debug.pixel(point.x + worldPos.x, point.y + worldPos.y, '#00FF00', 8)
+    //     this.game.debug.pixel(point.x + worldPos.x, point.y + worldPos.y, '#00FF00', constants.TILEWIDTH)
     //   })
     // }
   }

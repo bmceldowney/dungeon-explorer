@@ -1,18 +1,61 @@
-const scheduler = new ROT.Scheduler.Action();
+const scheduler = new ROT.Scheduler.Action()
+
+export default {
+    nextActor: function () {
+        const current = scheduler.next()
+        current.act()
+    }
+}
+
+const actions = {
+    attack: {
+        duration: 2
+    },
+    move: {
+        duration: 4
+    },
+    wait: {
+        duration: 1
+    }
+}
+
+const script = [
+    'move',
+    'move',
+    'move',
+    'move',
+    'wait',
+    'wait',
+    'attack',
+]
+
+
 
 /* generate some actors */
-for (var i=0;i<4;i++) {
-    scheduler.add(i+1, true, i); /* last argument - initial delay */
+for (let i = 0; i < 4; i++) {
+    const actor = {
+        name: `Hacktor ${i + 1}`,
+        act: function () {
+            this.scriptStep++
+            if (this.scriptStep > script.length) return null
+            return script[this.scriptStep - 1]
+        },
+        scriptStep: 0
+    }
+
+    scheduler.add(actor, true, i + 1); /* last argument - initial delay */
 }
 
 /* simulate several turns */
-var template = "Actor %s performing action for %s time units (current time: %s)";
-for (var i=0;i<20;i++) {
-    var current = scheduler.next();
+for (let i = 0; i < 200; i++) {
+    const current = scheduler.next()
+    const action = current.act()
 
-    var actionDuration = Math.ceil(ROT.RNG.getUniform() * 20);
-    scheduler.setDuration(actionDuration);
+    if (action) {
+        const actionDuration = actions[action].duration
+        scheduler.setDuration(actionDuration)
 
-    var padded = actionDuration.toString().lpad("0");
-    console.log(template.format(current, padded, scheduler.getTime()))
+        const padded = actionDuration.toString().lpad("0")
+        console.log(`${current.name} performing ${action} action for ${padded} time units (current time: ${scheduler.getTime()})`)
+    }
 }

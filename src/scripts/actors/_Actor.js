@@ -1,24 +1,27 @@
+import constants from '../constants'
+
 const MOVE_DURATION = 75
-const MOVE_DISTANCE = 8
+const MOVE_DISTANCE = constants.TILEWIDTH
 
 export default class Actor {
-  constructor (game, sprite) {
+  constructor (game, sprite, behaviorManager) {
     this.game = game
     this.sprite = sprite
+    this.behaviorManager = behaviorManager
 
     this.canMove = true;
     this.isAlive = true;
 
     this.sprite.body.onMoveComplete.add(() => {
-        this.sprite.body.x = Phaser.Math.snapTo(this.sprite.body.x, 8);
-        this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, 8);
+        this.sprite.body.x = Phaser.Math.snapTo(this.sprite.body.x, constants.TILEWIDTH);
+        this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, constants.TILEWIDTH);
         this.canMove = true
         this.sprite.animations.play('idle');
     })
   }
 
   getCenteredPosition () {
-    return new Phaser.Point(Math.floor(this.sprite.body.x + 4), Math.floor(this.sprite.body.y + 4))
+    return new Phaser.Point(Math.floor(this.sprite.body.x + (constants.TILEWIDTH / 2)), Math.floor(this.sprite.body.y + (constants.TILEWIDTH / 2)))
   }
 
   kill () {
@@ -44,7 +47,7 @@ export default class Actor {
     this.sprite.animations.play('attack');
   }
 
-  moveAngle(angle) {
+  moveAngle (angle) {
     if (Math.abs(angle) > 90) {
       this.sprite.scale.x = -1;
     } else if (Math.abs(angle) < 90) {
@@ -54,9 +57,8 @@ export default class Actor {
     this.move(angle, 'walk');
   }
 
-  moveTimer(){
-    var moveDelay = this.game.time.create();
-    moveDelay.loop(500, this.travel, this);
-    moveDelay.start();
+  act () {
+      const action = this.behaviorManager.getAction()
+
   }
 }
