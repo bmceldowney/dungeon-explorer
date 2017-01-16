@@ -3,7 +3,11 @@ export default class _BehaviorManager {
         this.game = game
     }
 
-    get () {
-        return this._get()
+    getAction () {
+        return this._getAction()
+    }
+
+    _getAction () {
+        console.log('this should never fire')
     }
 }

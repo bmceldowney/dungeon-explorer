@@ -1,4 +1,7 @@
 const initialContext = {
+    input: {
+        isBlocked: false
+    },
     player: {
         health: 10,
         speed: 10,

@@ -1,4 +1,4 @@
 export default {
-  TILEWIDTH: 16,
-  TILEHEIGHT: 16
+    TILEWIDTH: 16,
+    TILEHEIGHT: 16
 }

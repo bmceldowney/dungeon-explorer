@@ -1,7 +1,7 @@
 import PlayerBehaviorManager from './PlayerBehaviorManager'
 
 export default {
-    player: game => {
+    player: (game) => {
         return new PlayerBehaviorManager(game)
     }
 }
