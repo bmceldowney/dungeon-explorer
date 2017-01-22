@@ -37,8 +37,19 @@ export default class Gameplay extends _State {
 
         this.scheduling.addActor(this.player)
         this.scheduling.start()
-        this.game.input.mouse.mouseWheelCallback = () => {
-            console.dir(arguments)
+        this.game.input.mouse.mouseWheelCallback = (evt) => {
+            const wheelDelta = evt.wheelDelta
+            console.dir(this.game.input.mouse.wheelDelta)
+            const width = this.game.width + (this.game.input.mouse.wheelDelta * 5)
+            const height = width * 0.625
+            this.game.scale.setGameSize(width, height)
+            // this.camera.setSize(1000,1000)
+            // this.game.scale.refresh()
+
+
+            // const scaleFactor = this.game.scale.scaleFactor
+            // console.log(scaleFactor)
+            // this.game.scale.setUserScale(.9,.9)
         }
     }
 

@@ -9,7 +9,7 @@ export default class PlayerBehaviorManager extends _BehaviorManager {
     }
 
     _getAction () {
-        let action = actions.pauseForInput(this.game, this.actor)
+        let action = null
         const position = Phaser.Point.parse(this.game.context.player.position)
         const destination = Phaser.Point.parse(this.game.context.player.destination)
 

@@ -15,15 +15,8 @@ export default class MoveAction extends _Action {
                     this.actor.moveAngle(angle).then(() => {
                         resolve(this.actor.moveSpeed)
                     })
-                } else {
-                    resolve(0)
                 }
             })
         })
-    }
-
-    _validatePayload () {
-        console.log('validating MoveAction payload')
-        return this.payload.postion && this.payload.destination
     }
 }

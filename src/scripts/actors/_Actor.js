@@ -18,6 +18,7 @@ export default class Actor {
             this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, constants.TILEWIDTH)
             this.canMove = true
             this.sprite.animations.play('idle')
+            this._updatePostion()
         })
     }
 
@@ -68,6 +69,33 @@ export default class Actor {
     }
 
     act () {
-        return this.behaviorManager.getAction()
+        let action = this.behaviorManager.getAction()
+
+        if (action) {
+            return action.execute()
+        } else {
+            return this._waitForInput()
+        }
+    }
+
+    _waitForInput () {
+        let promiseResolve
+
+        const interval = setInterval(() => {
+            let action = this.behaviorManager.getAction()
+
+            if (action) {
+                clearInterval(interval)
+                action.execute().then(result => {
+                    promiseResolve(result)
+                })
+            }
+        }, 250)
+
+        return new Promise(resolve => promiseResolve = resolve)
+    }
+
+    _updatePostion () {
+        // noop
     }
 }
