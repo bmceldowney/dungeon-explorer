@@ -9,10 +9,7 @@ const initialContext = {
             x: 2,
             y: 2
         },
-        destination: {
-            x: 2,
-            y: 2
-        }
+        destinationPath: []
     },
     enemies: {}
 }

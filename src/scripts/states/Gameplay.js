@@ -42,20 +42,35 @@ export default class Gameplay extends _State {
             console.dir(this.game.input.mouse.wheelDelta)
             const width = this.game.width + (this.game.input.mouse.wheelDelta * 5)
             const height = width * 0.625
+            console.log(`width: ${this.game.canvas.width}`)
+            console.log(`height: ${this.game.canvas.height}`)
             this.game.scale.setGameSize(width, height)
-            // this.camera.setSize(1000,1000)
-            // this.game.scale.refresh()
+            this.game.scale.refresh()
+            // this.game.world.scale.set(this.game.input.mouse.wheelDelta / 10)
 
+            // console.dir(this.game.world.scale)
+            // const zoomAmount = this.game.input.mouse.wheelDelta / 4
+            //
+            // this.game.camera.scale.x += zoomAmount
+            // this.game.camera.scale.y += zoomAmount
 
-            // const scaleFactor = this.game.scale.scaleFactor
-            // console.log(scaleFactor)
-            // this.game.scale.setUserScale(.9,.9)
+            // this.game.camera.bounds.x = size.x * this.game.camera.scale.x
+            // this.game.camera.bounds.y = size.y * this.game.camera.scale.y
+            // this.game.camera.bounds.width = size.width * this.game.camera.scale.x
+            // this.game.camera.bounds.height = size.height * this.game.camera.scale.y
+            // this.game.camera.bounds.width = this.game.width * this.game.camera.scale.x
+            // this.game.camera.bounds.height = this.game.height * this.game.camera.scale.y
         }
     }
 
     pointerClicked (btn) {
         const point = new Phaser.Point(Math.floor(btn.parent.worldX), Math.floor(btn.parent.worldY))
-        this.game.context.player.destination = this.pathfinding.pointToTile(point)
+
+        this.pathfinding.findPath(this.player.getCenteredPosition(), point, result => {
+            if (result && result.length) {
+                this.game.context.player.destinationPath = result
+            }
+        })
     }
 
     update () {

@@ -80,19 +80,23 @@ export default class Actor {
 
     _waitForInput () {
         let promiseResolve
+        let promiseReject
 
         const interval = setInterval(() => {
             let action = this.behaviorManager.getAction()
 
             if (action) {
                 clearInterval(interval)
-                action.execute().then(result => {
-                    promiseResolve(result)
-                })
+                action.execute()
+                    .then(result => promiseResolve(result))
+                    .catch(reason => promiseReject(reason))
             }
         }, 250)
 
-        return new Promise(resolve => promiseResolve = resolve)
+        return new Promise((resolve, reject) => {
+            promiseResolve = resolve
+            promiseReject = reject
+        })
     }
 
     _updatePostion () {

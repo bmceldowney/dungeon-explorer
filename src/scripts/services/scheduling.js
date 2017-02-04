@@ -27,10 +27,11 @@ export default {
                 console.log(`action completed, ${duration} ${scheduler.getTime()}`)
                 scheduler.setDuration(duration)
                 this._tick()
-            }, () => {
-                console.log('action failed!')
+            }).catch((reason) => {
+                console.log(`action failed: ${reason}`)
                 scheduler.setDuration(0)
-                this._tick()
+                debugger
+                // this._tick()
             })
     }
 }

@@ -11,10 +11,10 @@ export default class PlayerBehaviorManager extends _BehaviorManager {
     _getAction () {
         let action = null
         const position = Phaser.Point.parse(this.game.context.player.position)
-        const destination = Phaser.Point.parse(this.game.context.player.destination)
+        const destinationPath = this.game.context.player.destinationPath
 
-        if (!position.equals(destination)) {
-            action = actions.move(this.game, this.actor, { position, destination })
+        if (destinationPath.length > 0) {
+            action = actions.move(this.game, this.actor, { position, destinationPath })
         }
 
         return action
