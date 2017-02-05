@@ -32,11 +32,19 @@ export default class Gameplay extends _State {
 
         this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
 
-        this.pathfinding.loadTiledMap(this.level.map)
+        this.pathfinding.loadLevel(this.level)
         this.scheduling = services.scheduling()
 
         this.scheduling.addActor(this.player)
         this.scheduling.start()
+
+        this.visibility = services.visibility()
+        this.visibility.update(this.player, this.level)
+
+        this.scheduling.ticked.add(() => {
+            this.visibility.update(this.player, this.level)
+        })
+
         this.game.input.mouse.mouseWheelCallback = (evt) => {
             const wheelDelta = evt.wheelDelta
             console.dir(this.game.input.mouse.wheelDelta)
@@ -85,6 +93,21 @@ export default class Gameplay extends _State {
         const pixOffsetY = constants.TILEHEIGHT - 2
         const x = mouseX + worldPos.x
         const y = mouseY + worldPos.y
+
+        this.level.map.layer.data.forEach((row) => {
+            row.forEach((tile) => {
+                const point = this.pathfinding.tileToPoint({ x: tile.x, y: tile.y })
+                const rect = new Phaser.Rectangle(point.x, point.y, 16, 16)
+
+                if (tile.properties.visible) {
+
+                } else if (tile.properties.revealed) {
+                    this.game.debug.geom(rect, 'rgba(0, 0, 0, .75)')
+                } else {
+                    this.game.debug.geom(rect, 'rgba(0, 0, 0, 1)')
+                }
+            })
+        })
 
         this.game.debug.pixel(x, y)
         this.game.debug.pixel(x + pixOffsetX, y)

@@ -1,6 +1,7 @@
 import pathfinding from './pathfinding'
 import scheduling from './scheduling'
 import gameContext from './gameContext'
+import visibility from './visibility'
 
 export default {
     pathfinding: () => {
@@ -11,5 +12,8 @@ export default {
     },
     context: () => {
         return gameContext
+    },
+    visibility: () => {
+        return visibility
     }
 }

@@ -74,20 +74,9 @@ export default {
     },
 
     // used to load tilemap data that was generated in Tiled
-    loadTiledMap: (tiledMap) => {
-        const grid = tiledMap.layers[0].data.map(row => row.map(column => column.index))
-        const walkables = []
-
-        tiledMap.tilesets.forEach(tileSet => {
-            for (var prop in tileSet.tileProperties) {
-                if (tileSet.tileProperties.hasOwnProperty(prop)) {
-                    const tileGid = prop + tileSet.firstgid
-                    if (tileSet.tileProperties[prop].walkable) {
-                        walkables.push(parseInt(prop, 10) + tileSet.firstgid)
-                    }
-                }
-            }
-        })
+    loadLevel: (level) => {
+        const grid = level.getGrid()
+        const walkables = level.getWalkables()
 
         easystar.setGrid(grid)
         easystar.setAcceptableTiles(walkables)

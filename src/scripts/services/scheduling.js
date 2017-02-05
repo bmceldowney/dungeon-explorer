@@ -3,6 +3,7 @@ const PAUSE_RETRY = 250
 let pauseCount = 0
 
 export default {
+    ticked: new Phaser.Signal(),
     start: function () {
         this._tick()
     },
@@ -26,6 +27,7 @@ export default {
             .then(duration => {
                 console.log(`action completed, ${duration} ${scheduler.getTime()}`)
                 scheduler.setDuration(duration)
+                this.ticked.dispatch()
                 this._tick()
             }).catch((reason) => {
                 console.log(`action failed: ${reason}`)
