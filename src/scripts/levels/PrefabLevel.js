@@ -22,4 +22,25 @@ export default class PrefabLevel extends Level {
 
         return this.map
     }
+
+    getWalkables () {
+        const walkables = []
+
+        this.map.tilesets.forEach(tileSet => {
+            for (var prop in tileSet.tileProperties) {
+                if (tileSet.tileProperties.hasOwnProperty(prop)) {
+                    const tileGid = prop + tileSet.firstgid
+                    if (tileSet.tileProperties[prop].walkable) {
+                        walkables.push(parseInt(prop, 10) + tileSet.firstgid)
+                    }
+                }
+            }
+        })
+
+        return walkables
+    }
+
+    getGrid () {
+        return this.map.layers[0].data.map(row => row.map(column => column.index))
+    }
 }
