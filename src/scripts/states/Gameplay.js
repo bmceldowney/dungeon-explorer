@@ -102,7 +102,7 @@ export default class Gameplay extends _State {
                 if (tile.properties.visible) {
 
                 } else if (tile.properties.revealed) {
-                    this.game.debug.geom(rect, 'rgba(0, 0, 0, .75)')
+                    this.game.debug.geom(rect, 'rgba(0, 0, 0, .65)')
                 } else {
                     this.game.debug.geom(rect, 'rgba(0, 0, 0, 1)')
                 }
