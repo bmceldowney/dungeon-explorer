@@ -60,9 +60,9 @@ export default class Actor {
 
     moveAngle (angle) {
         if (Math.abs(angle) > 90) {
-            this.sprite.scale.x = -1
-        } else if (Math.abs(angle) < 90) {
             this.sprite.scale.x = 1
+        } else if (Math.abs(angle) < 90) {
+            this.sprite.scale.x = -1
         }
 
         return this.move(angle, 'walk')

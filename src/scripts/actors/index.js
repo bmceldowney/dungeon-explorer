@@ -1,4 +1,5 @@
 import Player from './Player';
+import Rat from './Rat';
 import Sprites from '../sprites';
 
 module.exports = {
@@ -11,5 +12,16 @@ module.exports = {
         }
 
         return player;
+    },
+
+    rat: function rat (game, x, y, group = null) {
+        var sprite = Sprites.rat(game, x, y);
+        var rat = new Rat(game, sprite);
+
+        if (group) {
+            group.add(rat.sprite);
+        }
+
+        return rat;
     }
 };

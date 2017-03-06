@@ -1,9 +1,9 @@
 import _State from './_State'
-import Actors from '../actors'
-import Fonts from '../fonts'
+import actors from '../actors'
 import levels from '../levels'
 import services from '../services'
 import constants from '../constants'
+import groups from '../groups'
 
 export default class Gameplay extends _State {
     constructor () {
@@ -24,10 +24,13 @@ export default class Gameplay extends _State {
         this.pathfinding = services.pathfinding()
 
         this.level.addMap()
+        console.log(this.level)
 
-        const playerStart = this.pathfinding.tileToPoint(context.player.position)
+        const playerObj = this.level.getPlayerPosition()
 
-        this.player = Actors.player(this.game, playerStart.x, playerStart.y, this.world)
+        this.player = actors.player(this.game, playerObj.x, playerObj.y, this.world)
+        this.enemies = groups.enemies(this.game)
+        this.enemies.initEnemies(this.level.getEnemies())
         this.camera.follow(this.player.sprite, Phaser.Camera.FOLLOW_LOCKON)
 
         this.game.input.activePointer.leftButton.onUp.add(this.pointerClicked, this)
