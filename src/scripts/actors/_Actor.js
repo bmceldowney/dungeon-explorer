@@ -15,7 +15,7 @@ export default class Actor {
 
         this.sprite.body.onMoveComplete.add(() => {
             this.sprite.body.x = Phaser.Math.snapTo(this.sprite.body.x, constants.TILEWIDTH)
-            this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, constants.TILEWIDTH)
+            this.sprite.body.y = Phaser.Math.snapTo(this.sprite.body.y, constants.TILEHEIGHT)
             this.canMove = true
             this.sprite.animations.play('idle')
             this._updatePostion()
@@ -23,11 +23,7 @@ export default class Actor {
     }
 
     get moveSpeed () {
-        return 15
-    }
-
-    getCenteredPosition () {
-        return new Phaser.Point(Math.floor(this.sprite.body.x + (constants.TILEWIDTH / 2)), Math.floor(this.sprite.body.y + (constants.TILEWIDTH / 2)))
+        return 1
     }
 
     kill () {

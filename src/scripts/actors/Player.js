@@ -9,7 +9,7 @@ export default class Player extends _Actor {
 
     _updatePostion () {
         const pathfinder = services.pathfinding()
-        const playerTile = pathfinder.pointToTile(this.getCenteredPosition())
+        const playerTile = pathfinder.pointToTile(pathfinder.getCenteredPosition(this))
         this.game.context.player.position = playerTile
     }
 }

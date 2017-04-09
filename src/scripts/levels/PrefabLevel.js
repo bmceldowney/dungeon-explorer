@@ -52,6 +52,14 @@ export default class PrefabLevel extends Level {
         return this.findObjectsByType('enemy')
     }
 
+    getItems () {
+        return this.findObjectsByType('item')
+    }
+
+    isTileVisible (x, y) {
+        return this.map.layer.data[y][x].properties.visible
+    }
+
     findObjectsByType (objectType) {
         return this.map.objects.objectLayer.filter((obj) => {
             return obj.type === objectType
