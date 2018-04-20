@@ -24,9 +24,6 @@ export default {
         })
     },
 
-    start: () => {
-    },
-
     menu: {
         onStart: (cb) => {
             EZGUI.components.startBtn.on('click', () => {
