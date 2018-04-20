@@ -6,7 +6,8 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --content-base build/ --inline",
     "build": "webpack",
-    "lint": "eslint ./src/scripts/*"
+    "lint": "eslint ./src/scripts/*",
+    "test": "mocha -w --recursive"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,19 @@
     "babel-core": "6.13.2",
     "babel-loader": "6.2.4",
     "babel-preset-es2015": "6.13.2",
+    "chai": "^4.1.2",
     "clean-webpack-plugin": "0.1.10",
     "copy-webpack-plugin": "0.3.3",
-    "eslint": "2.11.0",
+    "eslint": "^2.11.0",
     "eslint-config-idiomatic": "2.1.0",
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "mocha": "^5.1.1",
+    "sinon": "^4.5.0",
+    "sinon-chai": "^3.0.0",
     "webpack": "1.13.1",
     "webpack-dev-server": "1.14.1"
   },
