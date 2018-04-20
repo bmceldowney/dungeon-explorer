@@ -50,16 +50,18 @@ export default class Gameplay extends _State {
         this.visibility.update(this.player, this.level)
 
         this.scheduling.ticked.add(() => {
-            this.visibility.update(this.player, this.level)
-
             // hide enemies and items that are not in LoS
             this.enemies.forEach((enemy) => {
                 const tile = this.pathfinding.pointToTile(this.pathfinding.getCenteredPosition(enemy))
                 enemy.renderable = this.level.isTileVisible(tile.x, tile.y)
             })
+
+            this.visibility.update(this.player, this.level)
+            this.updateTiles()
         })
 
         // this.game.input.mouse.mouseWheelCallback = this.onMouseWheel
+        this.updateTiles()
     }
 
     onMouseWheel (evt) {
@@ -98,24 +100,23 @@ export default class Gameplay extends _State {
         })
     }
 
-    update () {
+    updateTiles () {
         this.level.map.layer.data.forEach((row) => {
             row.forEach((tile) => {
 
                 const point = this.pathfinding.tileToPoint({ x: tile.x, y: tile.y })
-                const rect = new Phaser.Rectangle(point.x, point.y, 16, 16)
 
                 if (tile.properties.visible) {
                     tile.alpha = 1
                 } else if (tile.properties.revealed) {
                     tile.alpha = 0.35
-                    // this.game.debug.geom(rect, 'rgba(0, 0, 0, .65)')
                 } else {
                     tile.alpha = 0
-                    // this.game.debug.geom(rect, 'rgba(0, 0, 0, 1)')
                 }
             })
         })
+
+        this.level.map.layer.dirty = true
     }
 
     render () {
