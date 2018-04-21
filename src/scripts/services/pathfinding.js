@@ -82,6 +82,15 @@ export default {
         easystar.setAcceptableTiles(walkables)
     },
 
+    getCenteredPosition: (obj) => {
+        let item = obj
+        if (obj.sprite) {
+            item = obj.sprite
+        }
+
+        return new Phaser.Point(Math.floor(item.body.x + (constants.TILEWIDTH / 2)), Math.floor(item.body.y + (constants.TILEHEIGHT / 2)))
+    },
+
     pointToTile: pointToTile,
 
     tileToPoint: tileToPoint

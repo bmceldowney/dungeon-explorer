@@ -4,7 +4,7 @@
   "description": "Explore dungeons!",
   "scripts": {
     "start": "npm run dev",
-    "dev": "webpack-dev-server --content-base build/ --inline",
+    "dev": "webpack-dev-server --content-base docs/ --inline",
     "build": "webpack",
     "lint": "eslint ./src/scripts/*",
     "test": "mocha -w --recursive"
@@ -22,8 +22,7 @@
     "chai": "^4.1.2",
     "clean-webpack-plugin": "0.1.10",
     "copy-webpack-plugin": "0.3.3",
-    "eslint": "^2.11.0",
-    "eslint-config-idiomatic": "2.1.0",
+    "eslint": "^4.19.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
@@ -37,6 +36,6 @@
   },
   "dependencies": {
     "easystarjs": "^0.3.1",
-    "phaser": "2.6.1"
+    "phaser": "^2.6.2"
   }
 }

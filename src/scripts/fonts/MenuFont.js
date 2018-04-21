@@ -1,8 +1,8 @@
 import _BitmapFont from './_BitmapFont';
 
-const KEY = 'alagard';
-const FONT = '/assets/fonts/alagard_gradient.png';
-const MAP = '/assets/fonts/alagard_gradient.fnt';
+const KEY = 'apple';
+const FONT = '/assets/fonts/apple.png';
+const MAP = '/assets/fonts/apple.fnt';
 
 export default class MenuFont extends _BitmapFont {
     static loadResource (loader) {
