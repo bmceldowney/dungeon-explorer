@@ -1,0 +1,95 @@
+{
+    "__config__": {
+        "name": "ui-theme",
+        "resources": [
+            "./images/wnd-grey-bg.png",
+            "./images/wnd-grey-corner.png",
+            "./images/wnd-grey-line.png",
+            "./images/btn-line.png",
+            "./images/btn-line-down.png",
+            "../fonts/apple.fnt"
+        ]
+    },
+
+    "default": {
+        "scale": 1,
+        "bg": "./images/btn-line-down.png",
+        "padding" : 0,
+        "bgPadding": 0,
+        "corner": "./images/btn-line.png",
+        "line": "./images/btn-line.png",
+        "font": {
+            "size": "8px",
+            "family": "apple",
+            "color": "#32ff32"
+        }
+    },
+
+    "Window": {
+        "bgPadding": 0,
+        "bg": "./images/btn-line-down.png",
+        "corner": "./images/btn-line.png",
+        "line": "./images/btn-line.png"
+    },
+
+    "Label_": {
+        "bgPadding": 0,
+        "bg": "",
+        "corner": " ",
+        "line": " "
+    },
+
+    "Layout": {
+        "bgPadding": 1,
+        "bg": "",
+        "corner": " ",
+        "line": " "
+    },
+
+    "List": {
+        "bg": "./images/sld-grey-bg.png",
+        "bgPadding": 5,
+        "corner": "../images/sld-grey-corner.png",
+        "line": "./images/sld-grey-line.png"
+    },
+
+    "Button": {
+        "bgPadding": 6,
+        "bg": { "default": "./images/btn-line-down.png", "down": "./images/btn-line.png" },
+        "corner-tl": { "default": "./images/btn-line.png" },
+        "corner-tr": { "default": "./images/btn-line.png" },
+        "corner-bl": { "default": "./images/btn-line.png" },
+        "corner-br": { "default": "./images/btn-line.png" },
+        "line-t": { "default": "./images/btn-line.png" },
+        "line-r": { "default": "./images/btn-line.png" },
+        "line-b": { "default": "./images/btn-line.png" },
+        "line-l": { "default": "./images/btn-line.png" }
+    },
+
+    "Slider": {
+        "bgPadding": 0,
+        "bg": "./images/sld-grey-bg.png",
+        "corner": "../images/sld-grey-corner.png",
+        "line": "./images/sld-grey-line.png"
+    },
+
+    "Slide": {
+        "image": { "default": "./images/down-grey-slide.png", "down": "./images/down-grey-slide-down.png" }
+    },
+
+   "Checkbox": {
+      "bgPadding": 6,
+      "bg": "./images/wnd-grey-bg.png",
+      "corner": "./images/wnd-grey-corner.png",
+      "line": "./images/wnd-grey-line.png",
+      "checkmark": "./images/chk-grey-checkmark.png"
+   },
+
+   "Radio": {
+      "bgPadding": 6,
+      "bg": "./images/wnd-grey-bg.png",
+      "corner": "./images/wnd-grey-corner.png",
+      "line": "./images/wnd-grey-line.png",
+      "checkmark": "./images/radio-grey-check.png"
+   }
+}
