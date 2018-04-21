@@ -43,4 +43,32 @@ export default class PrefabLevel extends Level {
     getGrid () {
         return this.map.layers[0].data.map(row => row.map(column => column.index))
     }
+
+    getPlayerPosition () {
+        return this.findObjectsByName('player')[0]
+    }
+
+    getEnemies () {
+        return this.findObjectsByType('enemy')
+    }
+
+    getItems () {
+        return this.findObjectsByType('item')
+    }
+
+    isTileVisible (x, y) {
+        return this.map.layer.data[y][x].properties.visible
+    }
+
+    findObjectsByType (objectType) {
+        return this.map.objects.objectLayer.filter((obj) => {
+            return obj.type === objectType
+        })
+    }
+
+    findObjectsByName (objectName) {
+        return this.map.objects.objectLayer.filter((obj) => {
+            return obj.name === objectName
+        })
+    }
 }

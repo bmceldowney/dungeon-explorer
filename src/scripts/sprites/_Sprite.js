@@ -9,7 +9,7 @@ export default class _Sprite extends Phaser.Sprite {
         const adjustedX = x + (constants.TILEWIDTH * anchorX)
         const adjustedY = y + (constants.TILEHEIGHT * anchorY)
 
-        super(game, adjustedX, adjustedY, key, frame);
+        super(game, adjustedX, adjustedY, key, frame)
         this.anchor.setTo(anchorX, anchorY)
     }
 }
