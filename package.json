@@ -6,6 +6,7 @@
     "start": "npm run dev",
     "dev": "webpack-dev-server --content-base build/ --inline",
     "build": "webpack",
+    "deploy": "git push origin `git subtree split --prefix build master`:gh-pages --force",
     "lint": "eslint ./src/scripts/*",
     "test": "mocha -w --recursive"
   },
