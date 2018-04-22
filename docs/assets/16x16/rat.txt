@@ -1,9 +1,0 @@
-tileswide 2
-tileshigh 2
-tilewidth 16
-tileheight 16
-
-layer 0
-0,1,
--1,2,
-
