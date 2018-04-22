@@ -7,7 +7,7 @@ module.exports = {
   entry: './scripts/index',
   devtool: 'source-map',
   output: {
-    path: path.join(__dirname, 'docs'),
+    path: path.join(__dirname, 'build'),
     filename: 'scripts/game.js',
     sourceMapFilename: '[file].map'
   },
@@ -18,7 +18,7 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanPlugin(['docs']),
+    new CleanPlugin(['build']),
     new CopyPlugin([{
       from: './static'
     }, {
