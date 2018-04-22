@@ -5,9 +5,6 @@ jobs:
       - image: node
     steps:
       - checkout
-      - run:
-          name: Build
-          command: npm run build
-      - run:
-          name: deploy
-          command: npm run deploy
+      - run: npm install
+      - run: npm run build
+      - run: npm run deploy
