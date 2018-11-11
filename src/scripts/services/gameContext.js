@@ -16,6 +16,6 @@ const initialContext = {
 
 export default {
     init: game => {
-        game.context = initialContext
+        game.gameContext = initialContext
     }
 }
