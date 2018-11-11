@@ -14,14 +14,14 @@ export default class Gameplay extends _State {
     }
 
     preload () {
-        this.context = services.context()
+        this.gameContext = services.context()
 
         this.level = levels.getLevel(this.game)
-        this.context.init(this.game)
+        this.gameContext.init(this.game)
     }
 
     create () {
-        const context = this.game.context
+        const context = this.game.gameContext
         this.pathfinding = services.pathfinding()
 
         this.level.addMap()
@@ -95,7 +95,7 @@ export default class Gameplay extends _State {
 
         this.pathfinding.findPath(this.pathfinding.getCenteredPosition(this.player), point, result => {
             if (result && result.length) {
-                this.game.context.player.destinationPath = result
+                this.game.gameContext.player.destinationPath = result
             }
         })
     }
