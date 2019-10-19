@@ -7,7 +7,8 @@ export default class Loading extends _State {
     init () {
         // Pixel-perfect canvas scaling!
         // Thanks to http://www.belenalbeza.com/retro-crisp-pixel-art-in-phaser/
-        this.game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        this.game.scale.setUserScale(2, 2);
+        this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
         this.game.scale.pageAlignHorizontally = true;
         this.game.scale.pageAlignVertically = true;
 
@@ -29,7 +30,6 @@ export default class Loading extends _State {
 
         Fonts.loadResources(this);
 
-        this.game.load.image('tiles', 'assets/16x16/simpleGraphics_tiles16x16.png');
         this.game.load.image('new', 'assets/16x16/retro_tiles.png');
         this.game.load.tilemap('testingGrounds', 'assets/testingGrounds.json', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.spritesheet(constants.SPRITEKEY, 'assets/16x16/retro_tiles.png', constants.TILEWIDTH, constants.TILEHEIGHT)

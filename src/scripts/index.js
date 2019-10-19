@@ -1,7 +1,7 @@
 import States from './states';
 
-const width = 643;
-const height = 340;
+const width = 400;
+const height = 300;
 const renderer = Phaser.AUTO;
 const parent = 'content';
 const defaultState = null;

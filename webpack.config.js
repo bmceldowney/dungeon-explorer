@@ -1,6 +1,7 @@
 var path = require('path');
 var CleanPlugin = require('clean-webpack-plugin');
 var CopyPlugin = require('copy-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -18,7 +19,12 @@ module.exports = {
     }]
   },
   plugins: [
-    new CleanPlugin(['docs']),
+    new webpack.ProgressPlugin((percent, msg) => {
+      process.stdout.clearLine();
+      process.stdout.cursorTo(0);
+      process.stdout.write(msg); // end the line
+    }),
+    new CleanPlugin(['docs/scripts/game.js']),
     new CopyPlugin([{
       from: './static'
     }, {

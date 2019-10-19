@@ -4,8 +4,8 @@ export default {
     // header: { position: { x: 0, y: 0 }, height: 40, text: 'HEADER' },
     draggable: false,
     position: { x: 20, y: 20 },
-    width: 344,
-    height: 200,
+    width: 360,
+    height: 260,
 
     layout: [1, 3],
     children: [

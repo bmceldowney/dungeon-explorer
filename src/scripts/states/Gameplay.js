@@ -65,33 +65,86 @@ export default class Gameplay extends _State {
     }
 
     onMouseWheel (evt) {
-        const wheelDelta = evt.wheelDelta
+        const game = this
         // console.dir(this.game.input.mouse.wheelDelta)
-        const width = this.game.width + (this.game.input.mouse.wheelDelta * 5)
-        const height = width * 0.625
-        // console.log(`width: ${this.game.canvas.width}`)
-        // console.log(`height: ${this.game.canvas.height}`)
-        this.game.scale.setGameSize(width, height)
-        this.game.scale.refresh()
-        // this.game.world.scale.set(this.game.input.mouse.wheelDelta / 10)
+        // console.log(`width: ${game.canvas.width}`)
+        // console.log(`height: ${game.canvas.height}`)
+        // game.scale.setGameSize(width, height)
+        // game.scale.refresh()
 
-        // console.dir(this.game.world.scale)
-        // const zoomAmount = this.game.input.mouse.wheelDelta / 4
-        //
-        // this.game.camera.scale.x += zoomAmount
-        // this.game.camera.scale.y += zoomAmount
+        const scales = [
+            {
+                scaleFactor: 1,
+                width: 800,
+                height: 600
+            },
+            {
+                scaleFactor: 2,
+                width: 400,
+                height: 300,
+            },
+            {
+                scaleFactor: 3,
+                width: 200,
+                height: 150
+            }
+        ]
 
-        // this.game.camera.bounds.x = size.x * this.game.camera.scale.x
-        // this.game.camera.bounds.y = size.y * this.game.camera.scale.y
-        // this.game.camera.bounds.width = size.width * this.game.camera.scale.x
-        // this.game.camera.bounds.height = size.height * this.game.camera.scale.y
-        // this.game.camera.bounds.width = this.game.width * this.game.camera.scale.x
-        // this.game.camera.bounds.height = this.game.height * this.game.camera.scale.y
+        // game.world.scale.set(game.input.mouse.wheelDelta / 10)
+
+        const zoomAmount = game.input.mouse.wheelDelta
+        const currentUserScaleFactor = game.scale._userScaleFactor.x;
+        const currentScaleIndex = currentUserScaleFactor - 1;
+        let scaleIndex = currentScaleIndex + 1;
+
+        if (zoomAmount < 0) {
+            scaleIndex = currentScaleIndex - 1;
+        }
+
+        if (scaleIndex >= scales.length || scaleIndex < 0) return;
+
+        console.dir(`scaleIndex ${scaleIndex}`)
+        const scale = scales[scaleIndex];
+        game.scale.setUserScale(scale.scaleFactor, scale.scaleFactor);
+            
+        // game.width = scale.width;
+        // game.height = scale.height;
+        // game.scale.refresh()
+
+        // game.camera.scale.x += zoomAmount
+        // game.camera.scale.y += zoomAmount
+
+
+
+        // game.camera.bounds.x = size.x * game.camera.scale.x
+        // game.camera.bounds.y = size.y * game.camera.scale.y
+        // game.camera.bounds.width = size.width * game.camera.scale.x
+        // game.camera.bounds.height = size.height * game.camera.scale.y
+        // game.camera.bounds.width = game.width * game.camera.scale.x
+        // game.camera.bounds.height = game.height * game.camera.scale.y
+
+        console.dir(`new scale factor ${scale.scaleFactor}`)
     }
-
 
     pointerClicked (btn) {
         const point = new Phaser.Point(Math.floor(btn.parent.worldX), Math.floor(btn.parent.worldY))
+
+        // get the tile so that we can check to see if it's discovered, if there's
+        // an item or if there's a monster
+        const tileCoords = this.pathfinding.pointToTile(point)
+        const tile = this.level.map.layer.data[tileCoords.y][tileCoords.x]
+
+        // if we haven't seen the tile, we can't move there
+        if (!tile.properties.revealed) return
+
+        // if there's an item, interact with it
+        const items = this.level.getItems()
+        const item = items.find(item => item.x === tile.worldX && item.y === tile.worldY)
+
+        if (item) {
+
+            debugger
+        }
 
         this.pathfinding.findPath(this.pathfinding.getCenteredPosition(this.player), point, result => {
             if (result && result.length) {
@@ -104,7 +157,7 @@ export default class Gameplay extends _State {
         this.level.map.layer.data.forEach((row) => {
             row.forEach((tile) => {
 
-                const point = this.pathfinding.tileToPoint({ x: tile.x, y: tile.y })
+                // const point = this.pathfinding.tileToPoint({ x: tile.x, y: tile.y })
 
                 if (tile.properties.visible) {
                     tile.alpha = 1
